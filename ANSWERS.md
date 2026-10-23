@@ -3,7 +3,7 @@
 Name: Marc Elson Rebato  
 Section: ILFV3  
 Student ID: 241-00680  
-GitHub link: Pending upload
+GitHub link: [Frostyrr/flutter_basics_lab](https://github.com/Frostyrr/flutter_basics_lab)
 
 ## Activity changes
 
@@ -78,4 +78,4 @@ _ThemeDemoAppState stores _isDark. The switch calls the callback, which updates 
 
 ## Submission note
 
-The seven screenshots are in the screenshots folder. The GitHub upload and repository link are still pending.
+The seven screenshots are in the screenshots folder. The GitHub repository link is listed above.
