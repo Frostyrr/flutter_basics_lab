@@ -1,0 +1,99 @@
+import 'package:flutter/material.dart';
+
+import 'student.dart';
+
+void main() => runApp(const WaterTrackerApp());
+
+class WaterTrackerApp extends StatelessWidget {
+  const WaterTrackerApp({super.key});
+  @override
+  Widget build(BuildContext context) => MaterialApp(
+    title: 'Activity 2',
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(colorSchemeSeed: studentColor),
+    home: const WaterTrackerPage(),
+  );
+}
+
+class WaterTrackerPage extends StatefulWidget {
+  const WaterTrackerPage({super.key});
+  @override
+  State<WaterTrackerPage> createState() => _WaterTrackerPageState();
+}
+
+class _WaterTrackerPageState extends State<WaterTrackerPage> {
+  int _glasses = 0;
+  static const int _goal = 6;
+  void _addGlass() => setState(() {
+    if (_glasses < _goal) _glasses++;
+  });
+  void _removeGlass() => setState(() {
+    if (_glasses > 0) _glasses--;
+  });
+  void _reset() => setState(() {
+    _glasses = 0;
+  });
+  @override
+  Widget build(BuildContext context) {
+    debugPrint('build() called: $_glasses glasses');
+    final colors = Theme.of(context).colorScheme;
+    final goalReached = _glasses >= _goal;
+    return Scaffold(
+      appBar: AppBar(title: const Text('Activity 2 - $studentName')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.local_drink,
+              size: 96,
+              color: goalReached ? Colors.green : colors.primary,
+            ),
+            const SizedBox(height: 16),
+            Text(
+              '$_glasses / $_goal glasses',
+              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              goalReached
+                  ? 'Six glasses complete! Stay hydrated!'
+                  : 'Keep drinking water!',
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 18),
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: 240,
+              child: LinearProgressIndicator(
+                value: _glasses / _goal,
+                minHeight: 12,
+              ),
+            ),
+            const SizedBox(height: 32),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton.filledTonal(
+                  tooltip: 'Remove glass',
+                  onPressed: _removeGlass,
+                  icon: const Icon(Icons.remove),
+                  iconSize: 32,
+                ),
+                const SizedBox(width: 24),
+                IconButton.filled(
+                  tooltip: 'Add glass',
+                  onPressed: _addGlass,
+                  icon: const Icon(Icons.add),
+                  iconSize: 32,
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            TextButton(onPressed: _reset, child: const Text('Reset')),
+          ],
+        ),
+      ),
+    );
+  }
+}
